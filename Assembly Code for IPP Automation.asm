@@ -28,3 +28,46 @@ MOV [Data_Bank], DI          ; Add Data Cluster to Data Bank
 
 ; End of IPP setup
 HLT                          ; Halt execution
+
+; IPP Enhanced: Dynamic Node Web Management
+
+SECTION .data
+Node_Web_Terms    db "AX", 0
+Node_Web_Types    db "BX", 0
+Node_Web_Variables db "CX", 0
+Node_Web_Values   db "DX", 0
+Node_Web_Tokens   db "EX", 0
+Log_File          db "ipp_log.txt", 0
+
+SECTION .bss
+Cluster_Buffer resb 256
+Bank_Buffer    resb 512
+
+SECTION .text
+global _start
+
+_start:
+    ; Step 1: Load Node Webs into Registers
+    MOV AX, [Node_Web_Terms]
+    MOV BX, [Node_Web_Types]
+    MOV CX, [Node_Web_Variables]
+    MOV DX, [Node_Web_Values]
+    MOV EX, [Node_Web_Tokens]
+
+    ; Step 2: Save Configuration to Log
+    CALL Log_Configuration
+
+    ; Step 3: Monitor Registers
+    CALL Monitor_Registers
+
+    ; End Program
+    HLT
+
+Log_Configuration:
+    ; Simulated function to log register contents to Log_File
+    ; Future implementation connects this to external systems.
+    RET
+
+Monitor_Registers:
+    ; Monitor node web performance and log utilization
+    RET
