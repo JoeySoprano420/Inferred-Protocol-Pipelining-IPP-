@@ -71,3 +71,37 @@ Log_Configuration:
 Monitor_Registers:
     ; Monitor node web performance and log utilization
     RET
+
+; IPP Advanced: Parallelism and Logging Extensions
+
+SECTION .data
+Node_Webs db "AX", "BX", "CX", 0
+Log_File  db "advanced_ipp_log.txt", 0
+
+SECTION .bss
+Cluster_Buffer resb 256
+Bank_Buffer    resb 512
+
+SECTION .text
+global _start
+
+_start:
+    ; Step 1: Parallel Node Web Allocation
+    CALL Parallel_Node_Allocation
+
+    ; Step 2: Enhanced Logging
+    CALL Enhanced_Logging
+
+    ; Step 3: Exit
+    HLT
+
+Parallel_Node_Allocation:
+    ; Allocate registers to node webs in parallel (emulation)
+    MOV EAX, [Node_Webs]   ; Emulate multi-threading using assembly macros
+    ; Future implementation integrates external multi-threading systems
+    RET
+
+Enhanced_Logging:
+    ; Log resource usage
+    ; Connect to real-world monitoring via external programs
+    RET
